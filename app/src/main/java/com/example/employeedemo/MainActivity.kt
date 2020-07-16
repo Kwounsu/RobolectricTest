@@ -1,9 +1,9 @@
 package com.example.employeedemo
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
+import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -14,6 +14,14 @@ class MainActivity : AppCompatActivity() {
         button.setOnClickListener {
             val intent = Intent(this, SecondActivity::class.java)
             startActivity(intent)
+        }
+        button_changeAge.setOnClickListener {
+            val ageTextView = findViewById<TextView>(R.id.textView_age)
+            if (ageTextView.text == "99") {
+                ageTextView.text = "12"
+            } else {
+                ageTextView.text = "99"
+            }
         }
     }
 }

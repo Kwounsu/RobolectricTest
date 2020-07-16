@@ -2,7 +2,6 @@ package com.example.employeedemo
 
 import android.content.Intent
 import android.os.Build
-import android.util.Log
 import androidx.test.core.app.ActivityScenario
 import kotlinx.android.synthetic.main.activity_main.*
 import org.junit.After
@@ -13,7 +12,6 @@ import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.Shadows
 import org.robolectric.annotation.Config
-
 
 @Config(sdk = [Build.VERSION_CODES.O_MR1])
 @RunWith(RobolectricTestRunner::class)
@@ -115,6 +113,22 @@ class MainActivityTest {
             val drawableResId: Int = Shadows.shadowOf(imageView.drawable).createdFromResId
             assertNotNull("TextView could not be found", imageView)
             assertEquals(R.drawable.ic_launcher_foreground, drawableResId)
+        }
+    }
+
+    @Test
+    fun changeAge() {
+        scenario.onActivity{ activity ->
+            val textViewAge = activity.textView_age
+            val buttonChangeAge = activity.button_changeAge
+            if (textViewAge.text.toString() == "99") {
+                buttonChangeAge.performClick()
+                assertTrue("TextView contains incorrect text", "12" == textViewAge.text.toString())
+            }
+            if (textViewAge.text.toString() != "99") {
+                buttonChangeAge.performClick()
+                assertTrue("TextView contains incorrect text", "99" == textViewAge.text.toString())
+            }
         }
     }
 }
